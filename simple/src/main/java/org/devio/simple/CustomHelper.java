@@ -119,6 +119,10 @@ public class CustomHelper {
         }
     }
 
+    /**
+     * 使用TakePhoto自带相册
+     * @param takePhoto
+     */
     private void configTakePhotoOption(TakePhoto takePhoto) {
         TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
         if (rgPickTool.getCheckedRadioButtonId() == R.id.rbPickWithOwn) {

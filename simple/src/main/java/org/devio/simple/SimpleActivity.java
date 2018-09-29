@@ -33,6 +33,7 @@ import java.util.ArrayList;
  * Email:crazycodeboy@gmail.com
  */
 public class SimpleActivity extends TakePhotoActivity {
+    private CustomHelperUtils customHelperUtils;
     private CustomHelper customHelper;
 
     @Override
@@ -40,11 +41,16 @@ public class SimpleActivity extends TakePhotoActivity {
         super.onCreate(savedInstanceState);
         View contentView = LayoutInflater.from(this).inflate(R.layout.common_layout, null);
         setContentView(contentView);
+        customHelperUtils = CustomHelperUtils.of();
         customHelper = CustomHelper.of(contentView);
     }
 
     public void onClick(View view) {
-        customHelper.onClick(view, getTakePhoto());
+//        customHelperUtils.setCrop(true,false).setCorpWidthHeight(2500,2200)
+//                .setCompress(false,false,false)
+//                .setCompressRange(2*1024*1024,800,800)
+//                .setLimit(8).onClick(view, getTakePhoto());
+        customHelper.onClick(view,getTakePhoto());
     }
 
     @Override
