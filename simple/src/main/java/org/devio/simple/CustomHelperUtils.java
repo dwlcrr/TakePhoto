@@ -42,9 +42,9 @@ public class CustomHelperUtils {
     //最多选择几张
     private int limit = 6;
     //裁切宽度
-    private int corpWidth;
+    private int corpWidth = 3800;
     //裁切高度
-    private int corpHeight;
+    private int corpHeight= 3000;
     //宽/高
     private boolean isAspect = false;
 
@@ -68,12 +68,6 @@ public class CustomHelperUtils {
     private boolean isFromMyGallery = true;
     //纠正拍照的旋转角度
     private boolean corrected = true;
-
-
-
-    public static CustomHelperUtils of() {
-        return new CustomHelperUtils();
-    }
 
     /**
      * 裁切配置 是否裁切,是否是自带裁切
@@ -104,6 +98,7 @@ public class CustomHelperUtils {
             this.isCompressWithOwn = isCompressWithOwn;
             this.isShowProgressBar = showProgressBar;
         }else {
+            this.isSavePhoto = false;
             this.isCompressWithOwn = false;
             this.isShowProgressBar = false;
         }
@@ -128,7 +123,7 @@ public class CustomHelperUtils {
         return this;
     }
     /**
-     * 是否保存图片
+     * 是否保存原图
      */
     public CustomHelperUtils setSavePhotos(boolean isSavePhoto){
         this.isSavePhoto = isSavePhoto;
@@ -142,6 +137,11 @@ public class CustomHelperUtils {
         return this;
     }
 
+    /**
+     * 拍照或者从相册取照片
+     * @param isCamera true 是拍照，false 从相册取
+     * @param takePhoto
+     */
     public void onClick(boolean isCamera, TakePhoto takePhoto) {
 
         File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");

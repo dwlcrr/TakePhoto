@@ -41,32 +41,20 @@ public class SimpleActivity extends TakePhotoActivity {
         super.onCreate(savedInstanceState);
         View contentView = LayoutInflater.from(this).inflate(R.layout.common_layout, null);
         setContentView(contentView);
-//        customHelper = CustomHelper.of(contentView);
-        customHelperUtils = CustomHelperUtils.of();
+        customHelperUtils = new CustomHelperUtils();
         findViewById(R.id.btnPickBySelect).setOnClickListener(view ->{
             final SetPhotoImgDialog dialdog = new SetPhotoImgDialog(this);
             dialdog.show();
             dialdog.setNamekListener(name -> {
-                customHelperUtils.setCrop(true,false).setCorpWidthHeight(2500,2200)
-                        .setCompress(false,false,false)
-                        .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800).setLimit(8);
-                if (name.equals("拍照")) {
-                    customHelperUtils.onClick(true, getTakePhoto());
-                }else if(name.equals("相册")){
-                    customHelperUtils.onClick(false, getTakePhoto());
-                }
+                //.setAspect(true).setCorpWidthHeight(3800,3000)
+                customHelperUtils.setLimit(8).setCrop(true,true)
+                        .setCompress(true,true,true).setSavePhotos(true)
+                        .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800);
+                customHelperUtils.onClick(name.equals("拍照")? true:false, getTakePhoto());
                 dialdog.dismiss();
             });
         });
     }
-
-//    public void onClick(View view) {
-//        customHelperUtils.setCrop(true,false).setCorpWidthHeight(2500,2200)
-//                .setCompress(false,false,false)
-//                .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800)
-//                .setLimit(8).onClick(view, getTakePhoto());
-////        customHelper.onClick(view,getTakePhoto());
-//    }
 
     @Override
     public void takeCancel() {

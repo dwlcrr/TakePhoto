@@ -19,7 +19,6 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 	private TextView tv_takePhoto,tv_selectPic,tv_cancel;
 	private OnNameCListener OnNameCListener;
 	private Context context;
-	private View contentView;
 	public SetPhotoImgDialog(Context context) {
 		super(context, R.style.ShareDialog);
 		Window window   = this.getWindow();
@@ -38,17 +37,12 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.item_set_photo);
-		contentView = LayoutInflater.from(context).inflate(R.layout.item_set_photo, null);
 		tv_cancel  = findViewById(R.id.tv_cancel);
 		tv_takePhoto  = findViewById(R.id.tv_takePhoto);
 		tv_selectPic  = findViewById(R.id.tv_selectPic);
 		tv_selectPic.setOnClickListener(this);
 		tv_cancel.setOnClickListener(this);
 		tv_takePhoto.setOnClickListener(this);
-	}
-
-	public View getContentView(){
-		return  contentView;
 	}
 
 	/**
