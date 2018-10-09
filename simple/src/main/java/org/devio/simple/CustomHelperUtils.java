@@ -55,7 +55,8 @@ public class CustomHelperUtils {
     //是否自带压缩进度条
     private boolean isShowProgressBar = true;
     // 压缩到的最大大小，单位B  1024 * 1024 = 1M
-    private int compressSize = 1024 * 1024;
+    public final int COMPRESS_SIZE = 1024 * 1024;
+    private int compressSize;
     private int compresWidth = 800;
     private int compressHeight = 800;
     // 拍照压缩后是否保存原图
@@ -141,7 +142,7 @@ public class CustomHelperUtils {
         return this;
     }
 
-    public void onClick(View view, TakePhoto takePhoto) {
+    public void onClick(boolean isCamera, TakePhoto takePhoto) {
 
         File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
@@ -151,41 +152,36 @@ public class CustomHelperUtils {
 
         configCompress(takePhoto);
         configTakePhotoOption(takePhoto);
-        switch (view.getId()) {
-            case R.id.btnPickBySelect:
-                if (limit > 1) {
-                    if (isCorp) {
-                        takePhoto.onPickMultipleWithCrop(limit, getCropOptions());
-                    } else {
-                        takePhoto.onPickMultiple(limit);
-                    }
-                    return;
-                }
-                //从相册取
-                if (isFromFile) {
-                    if (isCorp) {
-                        takePhoto.onPickFromDocumentsWithCrop(imageUri, getCropOptions());
-                    } else {
-                        takePhoto.onPickFromDocuments();
-                    }
-                    return;
-                } else {
-                    if (isCorp) {
-                        takePhoto.onPickFromGalleryWithCrop(imageUri, getCropOptions());
-                    } else {
-                        takePhoto.onPickFromGallery();
-                    }
-                }
-                break;
-            case R.id.btnPickByTake:
+        if(isCamera){
+            if (isCorp) {
+                takePhoto.onPickFromCaptureWithCrop(imageUri, getCropOptions());
+            } else {
+                takePhoto.onPickFromCapture(imageUri);
+            }
+        }else {
+            if (limit > 1) {
                 if (isCorp) {
-                    takePhoto.onPickFromCaptureWithCrop(imageUri, getCropOptions());
+                    takePhoto.onPickMultipleWithCrop(limit, getCropOptions());
                 } else {
-                    takePhoto.onPickFromCapture(imageUri);
+                    takePhoto.onPickMultiple(limit);
                 }
-                break;
-            default:
-                break;
+                return;
+            }
+            //从相册取
+            if (isFromFile) {
+                if (isCorp) {
+                    takePhoto.onPickFromDocumentsWithCrop(imageUri, getCropOptions());
+                } else {
+                    takePhoto.onPickFromDocuments();
+                }
+                return;
+            } else {
+                if (isCorp) {
+                    takePhoto.onPickFromGalleryWithCrop(imageUri, getCropOptions());
+                } else {
+                    takePhoto.onPickFromGallery();
+                }
+            }
         }
     }
 

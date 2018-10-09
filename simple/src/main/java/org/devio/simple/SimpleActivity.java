@@ -33,25 +33,40 @@ import java.util.ArrayList;
  * Email:crazycodeboy@gmail.com
  */
 public class SimpleActivity extends TakePhotoActivity {
+
     private CustomHelperUtils customHelperUtils;
-    private CustomHelper customHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View contentView = LayoutInflater.from(this).inflate(R.layout.common_layout, null);
         setContentView(contentView);
+//        customHelper = CustomHelper.of(contentView);
         customHelperUtils = CustomHelperUtils.of();
-        customHelper = CustomHelper.of(contentView);
+        findViewById(R.id.btnPickBySelect).setOnClickListener(view ->{
+            final SetPhotoImgDialog dialdog = new SetPhotoImgDialog(this);
+            dialdog.show();
+            dialdog.setNamekListener(name -> {
+                customHelperUtils.setCrop(true,false).setCorpWidthHeight(2500,2200)
+                        .setCompress(false,false,false)
+                        .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800).setLimit(8);
+                if (name.equals("拍照")) {
+                    customHelperUtils.onClick(true, getTakePhoto());
+                }else if(name.equals("相册")){
+                    customHelperUtils.onClick(false, getTakePhoto());
+                }
+                dialdog.dismiss();
+            });
+        });
     }
 
-    public void onClick(View view) {
+//    public void onClick(View view) {
 //        customHelperUtils.setCrop(true,false).setCorpWidthHeight(2500,2200)
 //                .setCompress(false,false,false)
-//                .setCompressRange(2*1024*1024,800,800)
+//                .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800)
 //                .setLimit(8).onClick(view, getTakePhoto());
-        customHelper.onClick(view,getTakePhoto());
-    }
+////        customHelper.onClick(view,getTakePhoto());
+//    }
 
     @Override
     public void takeCancel() {
@@ -67,6 +82,7 @@ public class SimpleActivity extends TakePhotoActivity {
     public void takeSuccess(TResult result) {
         super.takeSuccess(result);
         showImg(result.getImages());
+
     }
 
     private void showImg(ArrayList<TImage> images) {
