@@ -35,7 +35,8 @@ import java.util.ArrayList;
  * Email:crazycodeboy@gmail.com
  */
 public class SimpleFragment extends TakePhotoFragment {
-    private CustomHelper customHelper;
+    private CustomHelperUtils customHelperUtils;
+    private SetPhotoImgDialog dialdog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,23 @@ public class SimpleFragment extends TakePhotoFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.common_layout, null);
-        customHelper = CustomHelper.of(view);
+        initPhoto(view);
         return view;
     }
 
-    public void onClick(View view) {
-        customHelper.onClick(view, getTakePhoto());
+    private void initPhoto(View view) {
+        customHelperUtils = new CustomHelperUtils();
+        dialdog = new SetPhotoImgDialog(getActivity());
+        view.findViewById(R.id.btnPickBySelect).setOnClickListener(view1  ->{
+            dialdog.show();
+            dialdog.setNamekListener(name -> {
+                customHelperUtils.setLimit(8).setCrop(true,true)
+                        .setCompress(true,true,true).setSavePhotos(true)
+                        .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800);
+                customHelperUtils.onClick(name.equals("拍照")? true:false, getTakePhoto());
+                dialdog.dismiss();
+            });
+        });
     }
 
     @Override

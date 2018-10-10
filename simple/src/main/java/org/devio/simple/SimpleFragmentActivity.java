@@ -40,6 +40,6 @@ public class SimpleFragmentActivity extends FragmentActivity {
     }
 
     public void onClick(View v) {
-        fragment.onClick(v);
+//        fragment.onClick(v);
     }
 }

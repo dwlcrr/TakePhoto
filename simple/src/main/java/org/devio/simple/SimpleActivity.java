@@ -35,15 +35,15 @@ import java.util.ArrayList;
 public class SimpleActivity extends TakePhotoActivity {
 
     private CustomHelperUtils customHelperUtils;
-
+    private SetPhotoImgDialog dialdog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View contentView = LayoutInflater.from(this).inflate(R.layout.common_layout, null);
         setContentView(contentView);
         customHelperUtils = new CustomHelperUtils();
+        dialdog = new SetPhotoImgDialog(this);
         findViewById(R.id.btnPickBySelect).setOnClickListener(view ->{
-            final SetPhotoImgDialog dialdog = new SetPhotoImgDialog(this);
             dialdog.show();
             dialdog.setNamekListener(name -> {
                 //.setAspect(true).setCorpWidthHeight(3800,3000)
