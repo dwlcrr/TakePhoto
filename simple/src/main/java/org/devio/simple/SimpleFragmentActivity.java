@@ -39,7 +39,4 @@ public class SimpleFragmentActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    public void onClick(View v) {
-//        fragment.onClick(v);
-    }
 }

@@ -81,6 +81,15 @@ public class CustomHelperUtils {
         }
         return this;
     }
+
+    /**
+     * 是否设置宽高比
+     */
+    public CustomHelperUtils setAspect(boolean isAspect){
+        this.isAspect = isAspect;
+        return this;
+    }
+
     /**
      * 设置裁切宽高
      */
@@ -89,6 +98,7 @@ public class CustomHelperUtils {
         this.corpHeight= height;
         return this;
     }
+
     /**
      * 设置 是否压缩,是否自带压缩,是否自带压缩进度条
      */
@@ -102,14 +112,6 @@ public class CustomHelperUtils {
             this.isCompressWithOwn = false;
             this.isShowProgressBar = false;
         }
-        return this;
-    }
-
-    /**
-     * 是否设置宽高比
-     */
-    public CustomHelperUtils setAspect(boolean isAspect){
-        this.isAspect = isAspect;
         return this;
     }
 

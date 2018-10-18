@@ -1,8 +1,14 @@
 package org.devio.simple;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 
@@ -27,10 +33,31 @@ import android.view.View;
  * Email:crazycodeboy@gmail.com
  */
 public class MainActivity extends Activity implements View.OnClickListener {
+
+    private static final int NOTIFICATIONS_ID = 11111;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
+        testNotification();
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void testNotification() {
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        PendingIntent contentIntent = PendingIntent.getActivity(
+                this, 0, new Intent(this, ResultActivity.class), 0);
+
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_done_white)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                .setContentIntent(contentIntent)
+                .build();// getNotification()
+
+        mNotifyMgr.notify(NOTIFICATIONS_ID, notification);
     }
 
     @Override
@@ -41,6 +68,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btnTakePhotoFragment:
                 startActivity(new Intent(this, SimpleFragmentActivity.class));
+                break;
+            case R.id.btnTest:
+                startActivity(new Intent(this, TestActivity.class));
                 break;
             default:
         }
