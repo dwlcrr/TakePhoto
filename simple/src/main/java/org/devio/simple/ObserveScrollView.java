@@ -12,7 +12,7 @@ public class ObserveScrollView extends HorizontalScrollView {
 
     public interface ScrollListener {//声明接口，用于传递数据
 
-        void scrollOritention(HorizontalScrollView scrollView,int x, int y, int oldX, int oldY);
+        void scrollOritention(HorizontalScrollView scrollView, int x, int y, int oldX, int oldY);
 
         void onScrolled(boolean isScrolled);
     }
@@ -38,10 +38,10 @@ public class ObserveScrollView extends HorizontalScrollView {
         // TODO Auto-generated method stub
         super.onScrollChanged(l, t, oldl, oldt);
         if (mListener != null) {
-            mListener.scrollOritention(this,l, t, oldl, oldt);
+            mListener.scrollOritention(this, l, t, oldl, oldt);
         }
     }
-
+    //工作上 努力 努力 努力。
     public void setScrollListener(ScrollListener l) {
         this.mListener = l;
     }
@@ -50,13 +50,13 @@ public class ObserveScrollView extends HorizontalScrollView {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-               if(mListener!=null){
+                if (mListener != null) {
                     mListener.onScrolled(true);
-               }
+                }
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                if(mListener!=null){
+                if (mListener != null) {
                     mListener.onScrolled(false);
                 }
                 break;
@@ -64,6 +64,20 @@ public class ObserveScrollView extends HorizontalScrollView {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    public void fling(int x){
+        super.fling(x);
+        //惯性滑动
+    }
+
+    @Override
+    public void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(true, l, t, r, b);
+        int tag = Integer.parseInt((String) this.getTag());
+        if (tag % 2 == 1) {
+            fullScroll(FOCUS_RIGHT);
+        }
+    }
 //    @Override
 //    public boolean onInterceptTouchEvent(MotionEvent ev) {
 //        // TODO 自动生成的方法存根

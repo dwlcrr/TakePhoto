@@ -18,7 +18,10 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 
 	private TextView tv_takePhoto,tv_selectPic,tv_cancel;
 	private OnNameCListener OnNameCListener;
+	public static final String CAMERA = "拍照";
+	public static final String PHOTO = "相册";
 	private Context context;
+
 	public SetPhotoImgDialog(Context context) {
 		super(context, R.style.ShareDialog);
 		Window window   = this.getWindow();
@@ -30,7 +33,7 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 		lParams.gravity = Gravity.BOTTOM;
 		lParams.alpha = 0.95f;
 		window.setAttributes(lParams);
-		this.setCanceledOnTouchOutside(true);// 点击非有效区域隐藏
+		this.setCanceledOnTouchOutside(true);
 	}
 
 	@Override
@@ -47,11 +50,12 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 
 	/**
 	 * 回调接口
-	 * @author Administrator
+	 * @author dwl
 	 */
 	public interface OnNameCListener {
 		 void onClick(String name);
 	}
+
 	public void setNamekListener(OnNameCListener OnNameCListener) {
 		this.OnNameCListener = OnNameCListener;
 	}
@@ -60,10 +64,10 @@ public class SetPhotoImgDialog extends Dialog implements View.OnClickListener {
 	public void onClick(View v) {
 		if (v == tv_takePhoto) {
 			if (OnNameCListener != null) {
-				OnNameCListener.onClick("拍照");
+				OnNameCListener.onClick(CAMERA);
 			}
 		}else if(v == tv_selectPic){
-			OnNameCListener.onClick("相册");
+			OnNameCListener.onClick(PHOTO);
 		}
 		dismiss();
 	}

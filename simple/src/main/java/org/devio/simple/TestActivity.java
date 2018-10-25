@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.NestedScrollView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,13 +27,12 @@ import java.util.logging.Logger;
 public class TestActivity extends Activity {
 
     private ObserveScrollView svLeftTitle, svRightTitle, scrollViewLeft, scrollViewRight;
-    private boolean isLeft, isRight, isleftTitle, isRightTitle;
     private List<String> leftList = new ArrayList<>();
     private List<String> rightList = new ArrayList<>();
     private List<String> middleList = new ArrayList<>();
     private LinearLayout ll_qiQuanLeft, ll_qiQuanRight, ll_xingQuan;
     private int currentPos;
-
+    private  LinearLayout ll_right;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class TestActivity extends Activity {
             rightList.add("bbbbb");
         }
         for (int i = 0; i < 16; i++) {
-            middleList.add("bbbbb");
+            middleList.add("bbbbb");//
         }
         for (int i = 0; i < leftList.size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_qiquan_left, null);
@@ -88,6 +88,7 @@ public class TestActivity extends Activity {
             tv_latestPrice.setText(rightList.get(i));
             ll_qiQuanRight.addView(view);
         }
+        //
         for (int i = 0; i < middleList.size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.simple_item, null);
             TextView textView = view.findViewById(R.id.simple_text);
@@ -103,6 +104,7 @@ public class TestActivity extends Activity {
         scrollViewRight = findViewById(R.id.scrollViewRight);
         ll_qiQuanLeft = findViewById(R.id.ll_qiQuanLeft);
         ll_qiQuanRight = findViewById(R.id.ll_qiQuanRight);
+        ll_right = findViewById(R.id.ll_Right);
         ll_xingQuan = findViewById(R.id.ll_xingQuan);
 
         svLeftTitle.post(() -> svLeftTitle.fullScroll(View.FOCUS_RIGHT));
@@ -116,8 +118,8 @@ public class TestActivity extends Activity {
                 if (currentPos != 1) return;
                 Log.i("svTag", "svLeftTitle");
                 scrollViewLeft.scrollTo(x, y);
-                svRightTitle.scrollTo((int) svRightTitle.getX() - x + oldX, (int) svRightTitle.getY() - y + oldY);
-                scrollViewRight.scrollTo((int) scrollViewRight.getX() - x + oldX, (int) scrollViewRight.getY() - y + oldY);
+                svRightTitle.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
+                scrollViewRight.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
             }
 
             @Override
@@ -135,8 +137,8 @@ public class TestActivity extends Activity {
             public void scrollOritention(HorizontalScrollView scrollView, int x, int y, int oldX, int oldY) {
                 if (currentPos != 2) return;
                 scrollViewRight.scrollTo(x, y);
-                svLeftTitle.scrollTo((int) svLeftTitle.getX() - x + oldX, (int) svLeftTitle.getY() - y + oldY);
-                scrollViewLeft.scrollTo((int) scrollViewLeft.getX() - x + oldX, (int) scrollViewLeft.getY() - y + oldY);
+                svLeftTitle.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
+                scrollViewLeft.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
             }
 
             @Override
@@ -154,8 +156,8 @@ public class TestActivity extends Activity {
             public void scrollOritention(HorizontalScrollView scrollView, int x, int y, int oldX, int oldY) {
                 if (currentPos != 3) return;
                 svLeftTitle.scrollTo(x, y);
-                svRightTitle.scrollTo((int) svRightTitle.getX() + oldX - x, (int) svRightTitle.getY() - y + oldY);
-                scrollViewRight.scrollTo((int) scrollViewRight.getX() + oldX - x, (int) scrollViewRight.getY() - y + oldY);
+                svRightTitle.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
+                scrollViewRight.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
             }
 
             @Override
@@ -173,8 +175,8 @@ public class TestActivity extends Activity {
             public void scrollOritention(HorizontalScrollView scrollView, int x, int y, int oldX, int oldY) {
                 if (currentPos != 4) return;
                 svRightTitle.scrollTo(x, y);
-                svLeftTitle.scrollTo((int) svLeftTitle.getScrollX() + x - oldX, (int) svLeftTitle.getScaleY() + y - oldY);
-                scrollViewLeft.scrollTo((int) scrollViewLeft.getScrollX() + x - oldX, (int) scrollViewLeft.getScaleY() + y - oldY);
+                svLeftTitle.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x, y);
+                scrollViewLeft.scrollTo(ll_right.getWidth()-svRightTitle.getWidth()-x,y);
             }
 
             @Override

@@ -50,7 +50,7 @@ public class SimpleActivity extends TakePhotoActivity {
                 customHelperUtils.setLimit(8).setCrop(true,true)
                         .setCompress(true,true,true).setSavePhotos(true)
                         .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800);
-                customHelperUtils.onClick(name.equals("拍照")? true:false, getTakePhoto());
+                customHelperUtils.onClick(name.equals(dialdog.CAMERA)? true:false, getTakePhoto());
                 dialdog.dismiss();
             });
         });
@@ -70,7 +70,6 @@ public class SimpleActivity extends TakePhotoActivity {
     public void takeSuccess(TResult result) {
         super.takeSuccess(result);
         showImg(result.getImages());
-
     }
 
     private void showImg(ArrayList<TImage> images) {
