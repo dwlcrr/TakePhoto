@@ -83,19 +83,12 @@ public class CustomHelperUtils {
     }
 
     /**
-     * 是否设置宽高比
+     * 是否设置宽高比 设置裁切宽高
      */
-    public CustomHelperUtils setAspect(boolean isAspect){
+    public CustomHelperUtils setAspect(boolean isAspect,int corpWidth ,int corpHeight){
         this.isAspect = isAspect;
-        return this;
-    }
-
-    /**
-     * 设置裁切宽高
-     */
-    public CustomHelperUtils setCorpWidthHeight(int width, int height){
-        this.corpWidth = width;
-        this.corpHeight= height;
+        this.corpWidth = corpWidth;
+        this.corpHeight= corpHeight;
         return this;
     }
 

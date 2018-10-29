@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import org.devio.takephoto.app.TakePhotoActivity;
 import org.devio.takephoto.model.TImage;
 import org.devio.takephoto.model.TResult;
-
 import java.util.ArrayList;
 
 
@@ -46,8 +44,9 @@ public class SimpleActivity extends TakePhotoActivity {
         findViewById(R.id.btnPickBySelect).setOnClickListener(view ->{
             dialdog.show();
             dialdog.setNamekListener(name -> {
-                //.setAspect(true).setCorpWidthHeight(3800,3000)
-                customHelperUtils.setLimit(8).setCrop(true,true)
+                customHelperUtils.setLimit(8)
+                        .setSavePhotos(true)
+                        .setCrop(true,true).setAspect(true,3800,3800)
                         .setCompress(true,true,true).setSavePhotos(true)
                         .setCompressRange(2 * customHelperUtils.COMPRESS_SIZE,800,800);
                 customHelperUtils.onClick(name.equals(dialdog.CAMERA)? true:false, getTakePhoto());
