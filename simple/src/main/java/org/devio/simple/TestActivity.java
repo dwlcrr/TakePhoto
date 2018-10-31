@@ -45,12 +45,8 @@ public class TestActivity extends Activity {
     private void addData() {
         for (int i = 0; i < 16; i++) {
             leftList.add("aaaaa");
-        }
-        for (int i = 0; i < 16; i++) {
             rightList.add("bbbbb");
-        }
-        for (int i = 0; i < 16; i++) {
-            middleList.add("bbbbb");//
+            middleList.add("ccccc");
         }
         for (int i = 0; i < leftList.size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_qiquan_left, null);
@@ -88,7 +84,6 @@ public class TestActivity extends Activity {
             tv_latestPrice.setText(rightList.get(i));
             ll_qiQuanRight.addView(view);
         }
-        //
         for (int i = 0; i < middleList.size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.simple_item, null);
             TextView textView = view.findViewById(R.id.simple_text);

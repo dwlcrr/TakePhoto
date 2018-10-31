@@ -55,7 +55,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .setContentTitle("My notification")
                 .setContentText("Hello World!")
                 .setContentIntent(contentIntent)
-                .build();// getNotification()
+                .build();
 
         mNotifyMgr.notify(NOTIFICATIONS_ID, notification);
     }

@@ -78,40 +78,5 @@ public class ObserveScrollView extends HorizontalScrollView {
             fullScroll(FOCUS_RIGHT);
         }
     }
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        // TODO 自动生成的方法存根
-//        boolean intercept = false;
-//        int x = (int) ev.getX();
-//        int y = (int) ev.getY();
-//
-//        switch (ev.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                lastX = x;
-//                lastY = y;
-//                onTouchEvent(ev);  //添加这一句即可
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                if (Math.abs(x - lastX) > Math.abs(y - lastY)) {
-//                    intercept = true;
-//                } else {
-//                    intercept = false;
-//                }
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                intercept = false;
-//                break;
-//            default:
-//                intercept = true;
-//                break;
-//        }
-//        lastX = x;
-//        lastY = y;
-//        return intercept;
-//    }
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        return super.dispatchTouchEvent(ev);
-//    }
-//
+
 }
