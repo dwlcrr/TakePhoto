@@ -67,7 +67,6 @@ public class ObserveScrollView extends HorizontalScrollView {
     @Override
     public void fling(int x){
         super.fling(x);
-        //惯性滑动
     }
 
     @Override
